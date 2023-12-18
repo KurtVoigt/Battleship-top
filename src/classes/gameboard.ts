@@ -19,6 +19,7 @@ interface boardSpace {
     beenShot: boolean
 }
 
+
 type miss = "miss";
 class Gameboard{
     #board:boardSpace[][];
@@ -37,11 +38,16 @@ class Gameboard{
     //will have to disable the ability to click a coord from the 
     //frontend in order to disable clicking the same space multiple times
     receiveAttack(coords:coords){
-        if(this.#board[coords.x][coords.y].ship !== null){
-            this.#board[coords.x][coords.y].ship?.hit();
-            //put in game over here?
+        
+        if(this.#board[coords.y][coords.x].beenShot)
+            return;
+        
+
+        if(this.#board[coords.y][coords.x].ship !== null){
+            this.#board[coords.y][coords.x].ship?.hit();
         }
-        this.#board[coords.x][coords.y].beenShot = true;
+        this.#board[coords.y][coords.x].beenShot = true;
+        return;
     }
 
     allSunk(){
@@ -57,22 +63,46 @@ class Gameboard{
     }
 
     placeShip(shipInfo: shipPlacementType){
+
+        if(!this.OKToPlaceShipCheck(shipInfo)){
+            throw new Error("ship-already-placed");
+        }
+
         const newShip = new Ship(shipInfo.length);
-        (this.#board[shipInfo.startingCoord.x][shipInfo.startingCoord.y]).ship = newShip;
+        (this.#board[shipInfo.startingCoord.y][shipInfo.startingCoord.x]).ship = newShip;
         if(shipInfo.orient === "h"){
             for( let i=1; i<shipInfo.length; i++){
-                this.#board[shipInfo.startingCoord.x][shipInfo.startingCoord.y+i].ship = newShip;
-                console.log(this.#board[0][0]);
+                this.#board[shipInfo.startingCoord.y][shipInfo.startingCoord.x+i].ship = newShip;
             }
         }
         else{
             for( let i=1; i<shipInfo.length; i++){
-                this.#board[shipInfo.startingCoord.x+i][shipInfo.startingCoord.y].ship = newShip;
+                this.#board[shipInfo.startingCoord.y+i][shipInfo.startingCoord.x].ship = newShip;
             }
         }
         
  
     }
+
+    //true means ship is there false means space is free
+    OKToPlaceShipCheck(shipInfo: shipPlacementType){
+        if(shipInfo.orient === "h"){
+            for( let i=0; i<shipInfo.length; i++){
+                if(this.#board[shipInfo.startingCoord.y][shipInfo.startingCoord.x+i].ship instanceof Ship)
+                    return false;
+            }
+        }
+        else{
+            for( let i=1; i<shipInfo.length; i++){
+                if(this.#board[shipInfo.startingCoord.y+i][shipInfo.startingCoord.x].ship instanceof Ship)
+                    return false;
+
+            }
+        }
+        return true;
+
+    }
+ 
 
     get boardState(){
         return this.#board;
