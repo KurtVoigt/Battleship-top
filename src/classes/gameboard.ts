@@ -84,6 +84,7 @@ class Gameboard{
  
     }
 
+
     //true means ship is there false means space is free
     OKToPlaceShipCheck(shipInfo: shipPlacementType){
         if(shipInfo.orient === "h"){
@@ -110,5 +111,5 @@ class Gameboard{
 
 }
 
-export type {shipPlacementType}
+export type {shipPlacementType, coords}
 export {Gameboard}
