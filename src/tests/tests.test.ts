@@ -1,7 +1,7 @@
 import {expect, test} from 'vitest';
 import Ship from "../classes/ship";
-import {Gameboard, shipPlacementType} from '../classes/gameboard';
-
+import {Gameboard, shipPlacementType, shipSpace} from '../classes/gameboard';
+import Player from '../classes/player';
 //ship tests**********************************************************
 test("create ship", ()=>{
     const newShip = new Ship(3);
@@ -99,3 +99,35 @@ test("big one, place multiple ships, hit them all, and check if all are sunk",()
 
     expect(board.allSunk()).toBe(true);
 });
+
+//player tests ****************************************************888*****************
+//should dom have access to baord if it is managed via players? I think not
+//on the other hand, the dom manager needs at least read access to the boards to display the info on them
+//making the functions private would also break the tests...
+//leaving it this way I'm the only one working on this anyway
+test("player and AI function tests, place ships and attack", ()=>{
+const playerBoard = new Gameboard();
+const AIBoard = new Gameboard();
+const player = new Player(playerBoard);
+const AI = new Player(AIBoard);
+//set up ships
+AI.setAIShips();
+//should now have a board with ship lengths 5 4 3 3 2 
+const evaluatedAiBoard = evaluateBoard(AIBoard);
+expect(evaluatedAiBoard).toBe(true);
+function evaluateBoard(gb:Gameboard):boolean{
+    let arr:shipSpace[] = [];
+    for(let i=0; i<10; i++){
+        for(let j=0; j<10; j++){
+            if(gb.boardState[i][j].ship){
+                if(!(arr.find(entry => gb.boardState[i][j].ship=== entry)))
+                    arr.push(gb.boardState[i][j].ship);
+            }
+        }
+    }
+   return (arr.length == 5) 
+}
+
+});
+
+

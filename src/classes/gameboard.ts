@@ -111,5 +111,5 @@ class Gameboard{
 
 }
 
-export type {shipPlacementType, coords}
+export type {shipPlacementType, coords, shipSpace}
 export {Gameboard}
