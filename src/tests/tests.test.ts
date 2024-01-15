@@ -123,6 +123,9 @@ player.playerSetShip({x:7, y:3}, 2, "h")
 
 const evaluatedPBoard = evaluateBoard(playerBoard);
 
+player.playerAttack({x:0, y:0});
+
+expect(playerBoard.boardState[0][0].beenShot).toBe(true);
 expect(evaluatedAiBoard).toBe(true);
 expect(evaluatedPBoard).toBe(true);
 function evaluateBoard(gb:Gameboard):boolean{
