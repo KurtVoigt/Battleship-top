@@ -7,7 +7,11 @@ export default class Player {
     }
 
     aiAttack() {
-        this.board.receiveAttack(getRandomCoord());
+        let coord:coords = getRandomCoord();
+        while(this.board.boardState[coord.y][coord.x].beenShot){
+            coord = getRandomCoord();
+        }
+        this.board.receiveAttack(coord);
     }
 
     setAIShips(){

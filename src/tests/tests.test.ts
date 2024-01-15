@@ -114,7 +114,17 @@ const AI = new Player(AIBoard);
 AI.setAIShips();
 //should now have a board with ship lengths 5 4 3 3 2 
 const evaluatedAiBoard = evaluateBoard(AIBoard);
+
+player.playerSetShip({x:0, y:0}, 5, "h")
+player.playerSetShip({x:5, y:0}, 4, "h")
+player.playerSetShip({x:0, y:1}, 3, "v")
+player.playerSetShip({x:4, y:5}, 3, "v")
+player.playerSetShip({x:7, y:3}, 2, "h")
+
+const evaluatedPBoard = evaluateBoard(playerBoard);
+
 expect(evaluatedAiBoard).toBe(true);
+expect(evaluatedPBoard).toBe(true);
 function evaluateBoard(gb:Gameboard):boolean{
     let arr:shipSpace[] = [];
     for(let i=0; i<10; i++){
@@ -127,6 +137,7 @@ function evaluateBoard(gb:Gameboard):boolean{
     }
    return (arr.length == 5) 
 }
+
 
 });
 
