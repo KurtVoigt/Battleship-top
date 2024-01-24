@@ -2,8 +2,8 @@ import { Gameboard } from "./gameboard";
 import type { coords, shipPlacementType } from "./gameboard";
 export default class Player {
     private board: Gameboard
-    constructor(board: Gameboard) {
-        this.board = board;
+    constructor() {
+        this.board = new Gameboard();;
     }
 
     aiAttack() {
@@ -59,6 +59,10 @@ export default class Player {
             }
         }
 
+    }
+
+    get GameBoard(){
+        return this.board
     }
 
 }

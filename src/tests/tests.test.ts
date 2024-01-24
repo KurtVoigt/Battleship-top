@@ -106,14 +106,12 @@ test("big one, place multiple ships, hit them all, and check if all are sunk",()
 //making the functions private would also break the tests...
 //leaving it this way I'm the only one working on this anyway
 test("player and AI function tests, place ships and attack", ()=>{
-const playerBoard = new Gameboard();
-const AIBoard = new Gameboard();
-const player = new Player(playerBoard);
-const AI = new Player(AIBoard);
+const player = new Player();
+const AI = new Player();
 //set up ships
 AI.setAIShips();
 //should now have a board with ship lengths 5 4 3 3 2 
-const evaluatedAiBoard = evaluateBoard(AIBoard);
+const evaluatedAiBoard = evaluateBoard(AI.GameBoard);
 
 player.playerSetShip({x:0, y:0}, 5, "h")
 player.playerSetShip({x:5, y:0}, 4, "h")
@@ -121,11 +119,11 @@ player.playerSetShip({x:0, y:1}, 3, "v")
 player.playerSetShip({x:4, y:5}, 3, "v")
 player.playerSetShip({x:7, y:3}, 2, "h")
 
-const evaluatedPBoard = evaluateBoard(playerBoard);
+const evaluatedPBoard = evaluateBoard(player.GameBoard);
 
 player.playerAttack({x:0, y:0});
 
-expect(playerBoard.boardState[0][0].beenShot).toBe(true);
+expect(player.GameBoard.boardState[0][0].beenShot).toBe(true);
 expect(evaluatedAiBoard).toBe(true);
 expect(evaluatedPBoard).toBe(true);
 function evaluateBoard(gb:Gameboard):boolean{
