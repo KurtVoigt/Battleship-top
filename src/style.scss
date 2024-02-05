@@ -1,5 +1,6 @@
 $header-background: #101aa3;
 $header-font: #dcdce0;
+$button-gray: #9b9b9b;
 
 :root {
   font-family: 'Courier New', Courier, monospace;
@@ -43,22 +44,45 @@ body {
       align-items: center;
       justify-content: center;
       min-height: 90%;
+
       .start-button {
         font-size: 6rem;
-        background-color: #9b9b9b;
+        background-color: $button-gray ;
       }
     }
 
     background-color: rgb(7, 71, 190);
 
-    .placement-grid {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      grid-template-rows: repeat(10, 1fr);
+    .align-container {
+      display: flex;
+      justify-content: center;
 
-      .place-ship-space {
-        height: 10px;
-        border: 1px solid black;
+      #align-button {
+        background-color: $button-gray;
+        font-size: 1.5rem;
+      }
+    }
+
+    .placement-grid-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70%;
+      margin-top: 1rem;
+      gap: 1rem;
+      .placement-grid {
+        background-color: $button-gray;
+        border: 1rem solid $button-gray;
+        display: grid;
+        grid-template-columns: repeat(10, 3rem);
+        flex: 1 ;
+        border-style:outset;
+        .place-ship-space {
+          border: 1px inset black;
+          background-color: rgb(32, 177, 128);
+
+        }
       }
     }
   }

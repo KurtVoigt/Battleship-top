@@ -25,8 +25,13 @@ function StartButtonDom(): void {
 
 
 function PlaceShipDOM(): void {
+    const gridContainer = document.createElement("div");
+    gridContainer.classList.add("placement-grid-container");
+
+
     const retGrid = document.createElement("div");
     retGrid.classList.add("placement-grid");
+
 
     const alignButton = document.createElement("button");
     alignButton.innerText = "Horizontal"; 
@@ -48,11 +53,14 @@ function PlaceShipDOM(): void {
             retGrid.appendChild(space);
         }
     }
+ 
+    gridContainer.append(alignDiv);
+    gridContainer.appendChild(retGrid);
     const main = document.querySelector("main");
+
     if (main) {
         main.innerHTML = "";
-        main.append(alignDiv);
-        main.append(retGrid);
+        main.append(gridContainer);
     }
 }
 
