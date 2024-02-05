@@ -5,7 +5,7 @@
 
 
 function StartButtonDom(): void {
-    const retbutton = new HTMLButtonElement();
+    const retbutton = document.createElement("button");
     retbutton.type = "button";
     retbutton.classList.add("start-button");
 
@@ -18,23 +18,26 @@ function StartButtonDom(): void {
 
 
 function PlaceShipDOM(): void {
-    const retGrid = new HTMLDivElement();
-    const alignButton = new HTMLButtonElement();
+    const retGrid = document.createElement("div");
+    retGrid.classList.add("placement-grid");
+
+    const alignButton = document.createElement("button");
     alignButton.innerText = "Horizontal"; 
     alignButton.id ="align-button";
-    const alignLabel = new HTMLLabelElement();
+    alignButton.innerText = "Switch Alignment";
+    const alignLabel = document.createElement("label");
     alignLabel.classList.add("align-label");
     alignLabel.htmlFor = "align-button";
     
-    const alignDiv = new HTMLDivElement();
+    const alignDiv = document.createElement("div");
     alignDiv.classList.add("align-container");
     alignDiv.append(alignLabel, alignButton);
 
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
-            const space = new HTMLDivElement();
+            const space = document.createElement("div");
             space.classList.add("place-ship-space");
-            space.classList.add(i.toString() + j.toString());
+            space.classList.add(j.toString() + i.toString());
             retGrid.appendChild(space);
         }
     }
@@ -47,11 +50,11 @@ function PlaceShipDOM(): void {
 }
 
 function GameDOM(): void {
-    const playerGrid = new HTMLDivElement();
-    const aiGrid = new HTMLDivElement();
+    const playerGrid = document.createElement("div");
+    const aiGrid = document.createElement("div");
     for (let i = 0; i < 10; i++) {
-        const pSpace = new HTMLDivElement();
-        const aiSpace = new HTMLDivElement();
+        const pSpace = document.createElement("div");
+        const aiSpace = document.createElement("div");
         playerGrid.appendChild(pSpace);
         aiGrid.appendChild(aiSpace)
     }
