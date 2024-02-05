@@ -1,5 +1,6 @@
 import {StartButtonDom, PlaceShipDOM, GameDOM} from "./domFunctions.ts"
 import Player from "./classes/player.ts";
+import "./reset.scss";
 import "./style.scss";
 
 

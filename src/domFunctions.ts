@@ -7,12 +7,19 @@
 function StartButtonDom(): void {
     const retbutton = document.createElement("button");
     retbutton.type = "button";
+    retbutton.innerHTML= "START &#8594;";
+
     retbutton.classList.add("start-button");
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("start-button-container");
+    
+    buttonContainer.appendChild(retbutton);
 
     const main = document.querySelector("main");
     if (main) {
         main.innerHTML = "";
-        main.append(retbutton);
+        main.append(buttonContainer);
     }
 }
 
