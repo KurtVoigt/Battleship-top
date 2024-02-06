@@ -56,7 +56,24 @@ function PlaceShipState(){
         }
 
       });
+      //light up hovers
+
+      spaceList[i].addEventListener("mouseenter",()=>{
+        spaceList[i].classList.add("ship-placement-marker");
+        if( shipLengths[roundNumber] === 5 && shipOrient === "h"){//carrier
+          spaceList[i].classList.add("ship-placement-marker")
+          for(let j = 1; j <= 5; ++j){
+            if(spaceList[i+j])
+              spaceList[i+j].classList.add("ship-placement-marker");
+          }
+        }
+      });
     }
+    
+  }
+  //light up hovers
+  if(shipLengths[roundNumber] === 5){// carrier
+
   }
   
 }
