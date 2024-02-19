@@ -81,8 +81,17 @@ body {
         .place-ship-space {
           border: 1px inset black;
           background-color: rgba(0, 180, 9, 0.582);
-
+          &.ship-placement-marker{
+            background-color: $button-gray;
+          }
+          &.ship-disabled-marker{
+            background-color: brown;
+          }
+          &.placed-ship{
+            background-color: $button-gray;
+          }
         }
+
       }
     }
   }

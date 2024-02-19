@@ -44,20 +44,8 @@ export default class Player {
         this.board.receiveAttack(coord);
     }
 
-    playerSetShip(coord: coords, length: number, orient:"h"|"v"):void{
-        //should give a check in UI?
-        //yes don't allow this function call
-        //but what if it gets called?
-        //return error to front end to try again!
-        try{
-        this.board.placeShip({startingCoord:coord, length: length, orient: orient});
-        }
-        catch(e){
-            if(e instanceof Error){
-                //throw error to domMananger
-                throw e;
-            }
-        }
+    playerSetShip(coord: coords, length: number, orient:"h"|"v"): shipPlacementType| Error{
+       return this.board.placeShip({startingCoord:coord, length: length, orient: orient});
 
     }
 
