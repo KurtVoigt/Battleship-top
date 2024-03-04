@@ -65,7 +65,7 @@ class Gameboard{
     placeShip(shipInfo: shipPlacementType){
 
         if(!this.OKToPlaceShipCheck(shipInfo)){
-            throw new Error("ship-already-placed");
+            return new Error("ship-already-placed");
         }
 
         const newShip = new Ship(shipInfo.length);
@@ -80,6 +80,7 @@ class Gameboard{
                 this.#board[shipInfo.startingCoord.y+i][shipInfo.startingCoord.x].ship = newShip;
             }
         }
+         return shipInfo;
         
  
     }

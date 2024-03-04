@@ -67,7 +67,7 @@ function PlaceShipState() {
 
         if (roundNumber === 5) {
           //go to game!
-          GameState();
+          GameState(player);
         }
 
       });
@@ -127,8 +127,8 @@ function PlaceShipState() {
 }
 
 
-function GameState(): void {
-  GameDOM();
+function GameState(player:Player ): void {
+  GameDOM(player);
 }
 
 function ShipPlacementCallback(space: HTMLDivElement, roundNumber: number, shipLengths: readonly [5, 4, 3, 3, 2], orient: "h" | "v"): shipPlacementType | Error {

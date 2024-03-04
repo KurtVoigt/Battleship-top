@@ -14,6 +14,7 @@ $button-gray: #9b9b9b;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/**I have learned that over-nesting is a bad idea that really limits reusability, css is hard*/
 body {
   width: 100%;
   min-height: 100%;
@@ -71,27 +72,75 @@ body {
       min-height: 70%;
       margin-top: 1rem;
       gap: 1rem;
+
       .placement-grid {
         background-color: $button-gray;
         border: 1rem solid $button-gray;
         display: grid;
         grid-template-columns: repeat(10, 3rem);
-        flex: 1 ;
-        border-style:outset;
+        flex: 1;
+        border-style: outset;
+
         .place-ship-space {
           border: 1px inset black;
           background-color: rgba(0, 180, 9, 0.582);
-          &.ship-placement-marker{
+
+          &.ship-placement-marker {
             background-color: $button-gray;
           }
-          &.ship-disabled-marker{
+
+          &.ship-disabled-marker {
             background-color: brown;
           }
-          &.placed-ship{
+
+          &.placed-ship {
             background-color: $button-gray;
           }
         }
 
+      }
+    }
+
+    .game-grids-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 99%;
+      margin-top: 1rem;
+      gap: 1rem;
+
+      .game-grid-and-title {
+        .title{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .game-grid {
+          background-color: $button-gray;
+          border: 1rem solid $button-gray;
+          display: grid;
+          grid-template-columns: repeat(10, 2.5rem);
+          border-style: outset;
+
+          .game-ship-space {
+            border: 1px inset black;
+            background-color: rgba(0, 180, 9, 0.582);
+            min-height: 2.5rem;
+            
+          }
+          .placed-ship{
+              background-color: $button-gray;
+            }
+          .game-ship-space-enemy {
+            border: 1px inset black;
+            background-color: rgba(0, 180, 9, 0.582);
+            min-height: 2.5rem;
+
+            &:hover{
+              background-color: red;
+            }
+          }
+        }
       }
     }
   }
