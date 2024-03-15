@@ -40,8 +40,8 @@ export default class Player {
         
     }
 
-    playerAttack(coord:coords){
-        this.board.receiveAttack(coord);
+    playerAttack(coord:coords):boolean{
+        return this.board.receiveAttack(coord);
     }
 
     playerSetShip(coord: coords, length: number, orient:"h"|"v"): shipPlacementType| Error{

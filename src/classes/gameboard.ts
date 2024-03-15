@@ -37,17 +37,15 @@ class Gameboard{
 
     //will have to disable the ability to click a coord from the 
     //frontend in order to disable clicking the same space multiple times
-    receiveAttack(coords:coords){
+    receiveAttack(coords:coords):boolean{
         
-        if(this.#board[coords.y][coords.x].beenShot)
-            return;
-        
+        this.#board[coords.y][coords.x].beenShot = true;
 
         if(this.#board[coords.y][coords.x].ship !== null){
             this.#board[coords.y][coords.x].ship?.hit();
+            return true;
         }
-        this.#board[coords.y][coords.x].beenShot = true;
-        return;
+        return false;
     }
 
     allSunk(){

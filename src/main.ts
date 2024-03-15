@@ -1,8 +1,8 @@
-import { StartButtonDom, PlaceShipDOM, GameDOM } from "./domFunctions.ts"
+import { StartButtonDom, PlaceShipDOM, GameDOM, buildHitSquare, buildMissSquare } from "./domFunctions.ts"
 import Player from "./classes/player.ts";
 import "./reset.scss";
 import "./style.scss";
-import { shipPlacementType } from "./classes/gameboard.ts";
+import { coords, shipPlacementType } from "./classes/gameboard.ts";
 
 
 //TODO: Create DOM Elements, pass objects to dom functions to keep state consistent
@@ -129,6 +129,42 @@ function PlaceShipState() {
 
 function GameState(player:Player ): void {
   GameDOM(player);
+  //boards are now rendered, on click the ai to query hits, mark them in the dom (make a dom function
+  //that updates the ai dom with coords) , get the ai to do the hit and update THAT in the player grid
+  //and then you have a game!, maybe make it two player?
+  AttachAIBoardClickListeners();
+  
+}
+
+function AttachAIBoardClickListeners(): void{
+  const aiCells = document.querySelectorAll(".game-ship-space-enemy");
+  if(aiCells){
+    for(let i = 0; i < aiCells.length; ++i){
+      if(aiCells[i] instanceof HTMLDivElement){
+        aiCells[i].addEventListener("click",()=>{
+          let stringCoords:string;
+          let xCoord;
+          let yCoord;
+
+          if(aiCells[i].classList.item(1)){//why isn't this check good enough for typescript if it is null it won't go here
+            stringCoords = aiCells[i].classList.item(1) as string;
+            xCoord = stringCoords[0];
+            yCoord = stringCoords[1];
+
+            const coords:coords = {x:parseInt(xCoord), y: parseInt(yCoord)};
+            const hit = ai.playerAttack(coords);
+
+            if(hit)
+              buildHitSquare(aiCells[i] as HTMLDivElement); //once again this is already checked, figure this out
+            else
+              buildMissSquare(aiCells[i] as HTMLDivElement);
+          }
+
+
+        });
+      }
+    }
+  }
 }
 
 function ShipPlacementCallback(space: HTMLDivElement, roundNumber: number, shipLengths: readonly [5, 4, 3, 3, 2], orient: "h" | "v"): shipPlacementType | Error {

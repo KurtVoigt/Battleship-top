@@ -128,4 +128,14 @@ function GameDOM(player:Player): void {
     }   //redo button possibly
 }
 
-export { StartButtonDom, PlaceShipDOM, GameDOM };
+function buildHitSquare(space: HTMLDivElement){
+    const hitSquare = document.createElement("div");
+    hitSquare.classList.add("hit-square");
+    space.append(hitSquare);
+}
+function buildMissSquare(space: HTMLDivElement){
+    const missSquare = document.createElement("div");
+    missSquare.classList.add("miss-square");
+    space.append(missSquare);
+}
+export { StartButtonDom, PlaceShipDOM, GameDOM , buildHitSquare, buildMissSquare};

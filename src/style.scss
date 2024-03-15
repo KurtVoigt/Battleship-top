@@ -145,3 +145,15 @@ body {
     }
   }
 }
+
+.hit-square{
+  height: 65%;
+  border-radius: 50%;
+  background-color: red;
+}
+.miss-square{
+  height: 70%;
+  width:70%;
+  border-radius: 90%;
+  background-color: antiquewhite;
+}
